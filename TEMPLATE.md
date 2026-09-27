@@ -57,11 +57,3 @@ flowchart LR
 </details>
 ````
 
-## My rules for writing
-
-- Plain English and short sentences, written the way I'd explain it to a friend.
-- I run every example in Postgres before writing it down. No untested queries.
-- SQL keywords in UPPERCASE, table and column names in lowercase.
-- Use **bold** only for the one idea to remember.
-- Use Mermaid for diagrams so they render on GitHub and Notion.
-- Mark "nice-to-know" topics clearly so they can be skipped.
