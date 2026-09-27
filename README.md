@@ -16,7 +16,7 @@ I just finished a complete SQL & PostgreSQL course, and I didn't want everything
 
 This repo is two things for me:
 
-- **My own documentation.** When I forget a syntax or how something works, I come here before I google it.
+- **My own documentation.** When I forget a syntax or how something works, I come here & aslo google it.
 - **A record of what I've learned.** From my very first `SELECT`, all the way to indexes, query tuning and migrations.
 
 These are student notes, written while learning. If you spot a mistake, please open an issue. I'd genuinely love to learn from it.
