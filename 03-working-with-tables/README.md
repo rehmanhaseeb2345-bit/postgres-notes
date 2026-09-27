@@ -98,7 +98,7 @@ photos.user_id  REFERENCES  users.id
 
 ### One-to-one
 
-Not in this schema, but it comes up: say I later split off a `user_profiles` table for optional bio/avatar data. Each user has *at most one* profile, so `user_profiles.user_id` would be a foreign key to `users.id`, with a `UNIQUE` constraint on it too — that `UNIQUE` is what turns an ordinary one-to-many into a one-to-one, by blocking a second profile row from pointing at the same user. (`UNIQUE` gets its own section in [14 · Database-Side Validation and Constraints](../14-database-side-validation-and-constraints/README.md).)
+Not in this schema, but it comes up: say I later split off a `user_profiles` table for optional bio/avatar data. Each user has *at most one* profile, so `user_profiles.user_id` would be a foreign key to `users.id`, with a `UNIQUE` constraint on it too — that `UNIQUE` is what turns an ordinary one-to-many into a one-to-one, by blocking a second profile row from pointing at the same user. (`UNIQUE` gets its own section in [13 · Database-Side Validation and Constraints](../13-database-side-validation-and-constraints/README.md).)
 
 ### Many-to-many
 
@@ -110,7 +110,7 @@ flowchart LR
     P["🖼️ photos"] --> L
 ```
 
-I'm not building `likes` in this section — it gets a full section to itself in [16 · How to Build a 'Like' System](../16-how-to-build-a-like-system/README.md) — but recognizing "this is many-to-many, I need a join table" is the important part.
+I'm not building `likes` in this section — it gets a full section to itself in [15 · How to Build a 'Like' System](../15-how-to-build-a-like-system/README.md) — but recognizing "this is many-to-many, I need a join table" is the important part.
 
 ### ⚠️ Traps
 
@@ -410,7 +410,7 @@ It's still many-to-many (one user can follow many users, and be followed by many
 follows (id, follower_id → users.id, followed_id → users.id)
 ```
 
-A `users` row can show up in either column — or both. This gets built for real in [19 · How to Design a 'Follower' System](../19-how-to-design-a-follower-system/README.md).
+A `users` row can show up in either column — or both. This gets built for real in [18 · How to Design a 'Follower' System](../18-how-to-design-a-follower-system/README.md).
 
 </details>
 

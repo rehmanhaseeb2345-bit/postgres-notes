@@ -21,4 +21,4 @@ Tick the box above when a topic is done.
 
 ---
 
-[⬅ 10 · Selecting Distinct Records](../10-selecting-distinct-records/README.md) · [🏠 Index](../README.md) · [12 · Local PostgreSQL Installation ➡](../12-local-postgresql-installation/README.md)
+[⬅ 10 · Selecting Distinct Records](../10-selecting-distinct-records/README.md) · [🏠 Index](../README.md) · [12 · PostgreSQL Complex Datatypes ➡](../12-postgresql-complex-datatypes/README.md)

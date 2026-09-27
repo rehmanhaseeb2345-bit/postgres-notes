@@ -364,7 +364,7 @@ RETURNING name, price;
 > [!WARNING]
 > **`UPDATE` with no `WHERE` changes every single row in the table.** There's no confirmation prompt. I now always run the `WHERE` clause as a plain `SELECT` first, to see exactly which rows I'm about to hit, before turning it into an `UPDATE`.
 
-- **`25 × 1.10 = 27.50`, but I got `28`.** `price` is still an `INTEGER` column — the same simplification section 1's traps warned me about, in [13 · PostgreSQL Complex Datatypes](../13-postgresql-complex-datatypes/README.md). Postgres doesn't error on `price * 1.10`; it happily computes `27.5`, then rounds it to fit back into an `INTEGER` column when it's stored. `25` and `85` both landed exactly on `.5` and got rounded up to `28` and `94`. `10` and `60` had no decimals to round and came out exactly as `11` and `66`. If I actually needed the cents, `price` should be `NUMERIC`, not `INTEGER`.
+- **`25 × 1.10 = 27.50`, but I got `28`.** `price` is still an `INTEGER` column — the same simplification section 1's traps warned me about, in [12 · PostgreSQL Complex Datatypes](../12-postgresql-complex-datatypes/README.md). Postgres doesn't error on `price * 1.10`; it happily computes `27.5`, then rounds it to fit back into an `INTEGER` column when it's stored. `25` and `85` both landed exactly on `.5` and got rounded up to `28` and `94`. `10` and `60` had no decimals to round and came out exactly as `11` and `66`. If I actually needed the cents, `price` should be `NUMERIC`, not `INTEGER`.
 
 ---
 

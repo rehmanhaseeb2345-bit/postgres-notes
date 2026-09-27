@@ -120,7 +120,7 @@ CREATE TABLE products (
 | `INTEGER` | Whole numbers | `25` |
 
 > [!NOTE]
-> Real prices need decimals, so they'd use `NUMERIC` instead of `INTEGER`. I'm keeping it simple here. Data types get their own section in [13 · PostgreSQL Complex Datatypes](../13-postgresql-complex-datatypes/README.md). This table also has no `id` column yet; primary keys come in [03 · Working with Tables](../03-working-with-tables/README.md).
+> Real prices need decimals, so they'd use `NUMERIC` instead of `INTEGER`. I'm keeping it simple here. Data types get their own section in [12 · PostgreSQL Complex Datatypes](../12-postgresql-complex-datatypes/README.md). This table also has no `id` column yet; primary keys come in [03 · Working with Tables](../03-working-with-tables/README.md).
 
 ### ⚠️ Traps
 

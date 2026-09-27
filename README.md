@@ -5,8 +5,8 @@
 <br><br>
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Sections](https://img.shields.io/badge/sections-32-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-3%20%2F%2032-brightgreen?style=for-the-badge)
+![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-3%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -40,7 +40,7 @@ Every section ends with a **"What confused me"** part, because the things that c
 
 ## ▶️ Running the examples
 
-Every example on these pages is real. I ran all of them in Postgres before writing them down. Each section folder has an `examples.sql` file with every query from that page:
+Each section folder has an `examples.sql` file with every query from that page, in order, ready to run:
 
 ```bash
 createdb postgres_notes
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` 3 / 32 sections
+**Progress:** `███░░░░░░░░░░░░░░░░░░░░░░░░░░░░` 3 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -78,15 +78,14 @@ The core language: creating tables, reading, filtering, joining, grouping and co
 | 10 | [Selecting Distinct Records](10-selecting-distinct-records/README.md) | Removing duplicates from results. | ⬜ |
 | 11 | [Utility Operators, Keywords, and Functions](11-utility-operators-keywords-and-functions/README.md) | Small tools that make queries simpler. | ⬜ |
 
-### Part 2 — Setup, Data Types & Validation
+### Part 2 — Data Types & Validation
 
-Running Postgres locally, choosing the right data types, and making the database protect its own data.
+Choosing the right data type for every column, and making the database protect its own data.
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 12 | [Local PostgreSQL Installation](12-local-postgresql-installation/README.md) | Running Postgres on your own machine. | ⬜ |
-| 13 | [PostgreSQL Complex Datatypes](13-postgresql-complex-datatypes/README.md) | Choosing the right type for every column. | ⬜ |
-| 14 | [Database-Side Validation and Constraints](14-database-side-validation-and-constraints/README.md) | Making the database reject bad data. | ⬜ |
+| 12 | [PostgreSQL Complex Datatypes](12-postgresql-complex-datatypes/README.md) | Choosing the right type for every column. | ⬜ |
+| 13 | [Database-Side Validation and Constraints](13-database-side-validation-and-constraints/README.md) | Making the database reject bad data. | ⬜ |
 
 ### Part 3 — Database Design
 
@@ -94,12 +93,12 @@ Designing real features (likes, mentions, hashtags, followers) and building a fu
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 15 | [Database Structure Design Patterns](15-database-structure-design-patterns/README.md) | How to approach designing a schema. | ⬜ |
-| 16 | [How to Build a 'Like' System](16-how-to-build-a-like-system/README.md) | Designing likes the right way. | ⬜ |
-| 17 | [How to Build a 'Mention' System](17-how-to-build-a-mention-system/README.md) | Tagging users in photos and captions. | ⬜ |
-| 18 | [How to Build a 'Hashtag' System](18-how-to-build-a-hashtag-system/README.md) | Storing hashtags so they can be searched. | ⬜ |
-| 19 | [How to Design a 'Follower' System](19-how-to-design-a-follower-system/README.md) | Users following users. | ⬜ |
-| 20 | [Implementing Database Design Patterns](20-implementing-database-design-patterns/README.md) | Turning the designs into real tables. | ⬜ |
+| 14 | [Database Structure Design Patterns](14-database-structure-design-patterns/README.md) | How to approach designing a schema. | ⬜ |
+| 15 | [How to Build a 'Like' System](15-how-to-build-a-like-system/README.md) | Designing likes the right way. | ⬜ |
+| 16 | [How to Build a 'Mention' System](16-how-to-build-a-mention-system/README.md) | Tagging users in photos and captions. | ⬜ |
+| 17 | [How to Build a 'Hashtag' System](17-how-to-build-a-hashtag-system/README.md) | Storing hashtags so they can be searched. | ⬜ |
+| 18 | [How to Design a 'Follower' System](18-how-to-design-a-follower-system/README.md) | Users following users. | ⬜ |
+| 19 | [Implementing Database Design Patterns](19-implementing-database-design-patterns/README.md) | Turning the designs into real tables. | ⬜ |
 
 ### Part 4 — Complex Queries & Performance
 
@@ -107,11 +106,11 @@ Writing hard queries step by step, and understanding how Postgres stores, finds 
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 21 | [Approaching and Writing Complex Queries](21-approaching-and-writing-complex-queries/README.md) | A repeatable method for hard queries. | ⬜ |
-| 22 | [Understanding the Internals of PostgreSQL](22-understanding-the-internals-of-postgresql/README.md) | Where your data physically lives. | ⬜ |
-| 23 | [A Look at Indexes for Performance](23-a-look-at-indexes-for-performance/README.md) | How indexes make lookups fast, and what they cost. | ⬜ |
-| 24 | [Basic Query Tuning](24-basic-query-tuning/README.md) | Seeing what Postgres does with your query. | ⬜ |
-| 25 | [Advanced Query Tuning](25-advanced-query-tuning/README.md) | Understanding the planner's cost model. | ⬜ |
+| 20 | [Approaching and Writing Complex Queries](20-approaching-and-writing-complex-queries/README.md) | A repeatable method for hard queries. | ⬜ |
+| 21 | [Understanding the Internals of PostgreSQL](21-understanding-the-internals-of-postgresql/README.md) | Where your data physically lives. | ⬜ |
+| 22 | [A Look at Indexes for Performance](22-a-look-at-indexes-for-performance/README.md) | How indexes make lookups fast, and what they cost. | ⬜ |
+| 23 | [Basic Query Tuning](23-basic-query-tuning/README.md) | Seeing what Postgres does with your query. | ⬜ |
+| 24 | [Advanced Query Tuning](24-advanced-query-tuning/README.md) | Understanding the planner's cost model. | ⬜ |
 
 ### Part 5 — Advanced Querying
 
@@ -119,10 +118,10 @@ CTEs, recursive queries, views and materialized views.
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 26 | [Simple Common Table Expressions](26-simple-common-table-expressions/README.md) | Naming a sub-result to make queries readable. | ⬜ |
-| 27 | [Recursive Common Table Expressions](27-recursive-common-table-expressions/README.md) | Queries that walk through trees and graphs. | ⬜ |
-| 28 | [Simplifying Queries with Views](28-simplifying-queries-with-views/README.md) | Saving a query and using it like a table. | ⬜ |
-| 29 | [Optimizing Queries with Materialized Views](29-optimizing-queries-with-materialized-views/README.md) | Caching the result of an expensive query. | ⬜ |
+| 25 | [Simple Common Table Expressions](25-simple-common-table-expressions/README.md) | Naming a sub-result to make queries readable. | ⬜ |
+| 26 | [Recursive Common Table Expressions](26-recursive-common-table-expressions/README.md) | Queries that walk through trees and graphs. | ⬜ |
+| 27 | [Simplifying Queries with Views](27-simplifying-queries-with-views/README.md) | Saving a query and using it like a table. | ⬜ |
+| 28 | [Optimizing Queries with Materialized Views](28-optimizing-queries-with-materialized-views/README.md) | Caching the result of an expensive query. | ⬜ |
 
 ### Part 6 — Transactions & Migrations
 
@@ -130,9 +129,9 @@ Keeping data consistent and changing a schema safely over time.
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 30 | [Handling Concurrency and Reversibility with Transactions](30-handling-concurrency-and-reversibility-with-transactions/README.md) | All-or-nothing changes. | ⬜ |
-| 31 | [Managing Database Design with Schema Migrations](31-managing-database-design-with-schema-migrations/README.md) | Changing the schema safely, in steps you can undo. | ⬜ |
-| 32 | [Schema vs Data Migrations](32-schema-vs-data-migrations/README.md) | Keeping structure changes and data changes apart. | ⬜ |
+| 29 | [Handling Concurrency and Reversibility with Transactions](29-handling-concurrency-and-reversibility-with-transactions/README.md) | All-or-nothing changes. | ⬜ |
+| 30 | [Managing Database Design with Schema Migrations](30-managing-database-design-with-schema-migrations/README.md) | Changing the schema safely, in steps you can undo. | ⬜ |
+| 31 | [Schema vs Data Migrations](31-schema-vs-data-migrations/README.md) | Keeping structure changes and data changes apart. | ⬜ |
 
 ---
 
@@ -156,27 +155,26 @@ postgres-notes/
 ├── 09-assembling-queries-with-subqueries/
 ├── 10-selecting-distinct-records/
 ├── 11-utility-operators-keywords-and-functions/
-├── 12-local-postgresql-installation/
-├── 13-postgresql-complex-datatypes/
-├── 14-database-side-validation-and-constraints/
-├── 15-database-structure-design-patterns/
-├── 16-how-to-build-a-like-system/
-├── 17-how-to-build-a-mention-system/
-├── 18-how-to-build-a-hashtag-system/
-├── 19-how-to-design-a-follower-system/
-├── 20-implementing-database-design-patterns/
-├── 21-approaching-and-writing-complex-queries/
-├── 22-understanding-the-internals-of-postgresql/
-├── 23-a-look-at-indexes-for-performance/
-├── 24-basic-query-tuning/
-├── 25-advanced-query-tuning/
-├── 26-simple-common-table-expressions/
-├── 27-recursive-common-table-expressions/
-├── 28-simplifying-queries-with-views/
-├── 29-optimizing-queries-with-materialized-views/
-├── 30-handling-concurrency-and-reversibility-with-transactions/
-├── 31-managing-database-design-with-schema-migrations/
-├── 32-schema-vs-data-migrations/
+├── 12-postgresql-complex-datatypes/
+├── 13-database-side-validation-and-constraints/
+├── 14-database-structure-design-patterns/
+├── 15-how-to-build-a-like-system/
+├── 16-how-to-build-a-mention-system/
+├── 17-how-to-build-a-hashtag-system/
+├── 18-how-to-design-a-follower-system/
+├── 19-implementing-database-design-patterns/
+├── 20-approaching-and-writing-complex-queries/
+├── 21-understanding-the-internals-of-postgresql/
+├── 22-a-look-at-indexes-for-performance/
+├── 23-basic-query-tuning/
+├── 24-advanced-query-tuning/
+├── 25-simple-common-table-expressions/
+├── 26-recursive-common-table-expressions/
+├── 27-simplifying-queries-with-views/
+├── 28-optimizing-queries-with-materialized-views/
+├── 29-handling-concurrency-and-reversibility-with-transactions/
+├── 30-managing-database-design-with-schema-migrations/
+├── 31-schema-vs-data-migrations/
 ```
 
 Each section folder contains:
