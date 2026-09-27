@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="380" viewBox="0 0 900 380" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="1" y="1" width="898" height="378" rx="16" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="40" y="44" font-size="22" font-weight="700" fill="#1f2328">Anatomy of a table</text>
+  <!-- table name tab -->
+  <rect x="60" y="78" width="140" height="32" rx="6" fill="#336791"/>
+  <text x="130" y="99" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">products</text>
+  <text x="212" y="99" font-size="13" fill="#57606a">&#8592; table name</text>
+  <!-- header -->
+  <rect x="60" y="110" width="560" height="40" fill="#eaf1f8"/>
+  <!-- highlights -->
+  <rect x="340" y="110" width="140" height="184" fill="#fef3c7"/>
+  <rect x="60" y="186" width="560" height="36" fill="#dcfce7"/>
+  <!-- grid -->
+  <g stroke="#c9d1d9" stroke-width="1" fill="none">
+    <rect x="60" y="110" width="560" height="184"/>
+    <path d="M60 150H620M60 186H620M60 222H620M60 258H620"/>
+    <path d="M200 110V294M340 110V294M480 110V294"/>
+  </g>
+  <!-- header text -->
+  <g font-size="15" font-weight="700" fill="#1f2328" text-anchor="middle">
+    <text x="130" y="136">name</text><text x="270" y="136">category</text>
+    <text x="410" y="136">price</text><text x="550" y="136">stock</text>
+  </g>
+  <!-- rows -->
+  <g font-size="14" fill="#24292f" text-anchor="middle">
+    <text x="130" y="173">Wireless Mouse</text><text x="270" y="173">Electronics</text><text x="410" y="173">25</text><text x="550" y="173">120</text>
+    <text x="130" y="209">Notebook</text><text x="270" y="209">Stationery</text><text x="410" y="209">3</text><text x="550" y="209">500</text>
+    <text x="130" y="245">Desk Lamp</text><text x="270" y="245">Home</text><text x="410" y="245">40</text><text x="550" y="245">35</text>
+    <text x="130" y="281">USB-C Cable</text><text x="270" y="281">Electronics</text><text x="410" y="281">10</text><text x="550" y="281">300</text>
+  </g>
+  <!-- outlines -->
+  <rect x="340" y="110" width="140" height="184" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="6 4"/>
+  <rect x="60" y="186" width="560" height="36" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <rect x="341" y="187" width="138" height="34" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+  <!-- labels -->
+  <path d="M410 108V88" stroke="#d97706" stroke-width="2"/>
+  <text x="352" y="80" font-size="14" fill="#b45309" xml:space="preserve"><tspan font-weight="700">column</tspan> · one property of every row</text>
+  <path d="M622 130H645" stroke="#57606a" stroke-width="1.5"/>
+  <text x="652" y="126" font-size="14" fill="#1f2328" font-weight="700">header</text>
+  <text x="652" y="143" font-size="13" fill="#57606a">the column names</text>
+  <path d="M622 204H645" stroke="#16a34a" stroke-width="2"/>
+  <text x="652" y="200" font-size="14" fill="#15803d" font-weight="700">row</text>
+  <text x="652" y="217" font-size="13" fill="#57606a">one record (one product)</text>
+  <path d="M356 223V318" stroke="#dc2626" stroke-width="2"/>
+  <text x="356" y="338" font-size="14" fill="#b91c1c" xml:space="preserve"><tspan font-weight="700">value</tspan> · one piece of data (the price of Notebook is 3)</text>
+</svg>
