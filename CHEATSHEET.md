@@ -64,3 +64,30 @@ DELETE FROM products WHERE name = 'Sticky Notes' RETURNING *;
 ```
 
 **Remember:** `WHERE` runs before `SELECT`, so it can't see column aliases · `NULL` is never `=` or `<>` anything, use `IS NULL` / `IS NOT NULL` · a `NULL` inside a `NOT IN (...)` list silently zeroes out the whole result · always preview an `UPDATE`/`DELETE`'s `WHERE` with a plain `SELECT` first — there's no undo.
+
+---
+
+## Working with Tables · [03](03-working-with-tables/README.md)
+
+```sql
+-- Primary key: auto-incrementing identity
+CREATE TABLE users (
+    id       SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Foreign key: must match a real row in the parent table (or be NULL)
+CREATE TABLE photos (
+    id      SERIAL PRIMARY KEY,
+    url     VARCHAR(200) NOT NULL,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- ON DELETE options: CASCADE (delete children too) · SET NULL (disconnect) ·
+-- SET DEFAULT (fall back) · RESTRICT / NO ACTION (block the delete, the default)
+
+-- Explicit ids don't move a SERIAL sequence forward — resync it by hand:
+SELECT setval(pg_get_serial_sequence('photos', 'id'), (SELECT MAX(id) FROM photos));
+```
+
+**Remember:** create/insert parents before children, drop children before parents · a foreign key is checked on every insert/update, not just a naming convention · `ON DELETE` defaults to `NO ACTION` (blocks the delete) if you don't specify one · `CASCADE` can ripple through more than one table in a single `DELETE`.
