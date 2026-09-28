@@ -294,3 +294,26 @@ SELECT AGE(DATE '2026-09-28', birth_date) FROM user_profiles;
 ```
 
 **Remember:** `NUMERIC(p,s)` for money and anything that can't tolerate rounding drift · `CHAR(n)` pads with real trailing spaces that survive concatenation · `'1'::boolean` (text) works, `1::boolean` (integer) doesn't · `BOOLEAN` has three states — `TRUE`, `FALSE`, and `NULL` (unknown).
+
+---
+
+## Validation · [13](13-database-side-validation-and-constraints/README.md)
+
+```sql
+CREATE TABLE products (
+    name       VARCHAR(50)    NOT NULL,
+    category   VARCHAR(30)    NOT NULL,
+    price      NUMERIC(10, 2) CHECK (price >= 0),
+    stock      INTEGER        NOT NULL DEFAULT 0 CHECK (stock >= 0),
+    created_at TIMESTAMP      NOT NULL DEFAULT NOW()
+);
+
+-- Multi-column UNIQUE: no duplicate *combinations*
+UNIQUE (user_id, photo_id)
+
+-- Cross-column CHECK, added after the fact
+ALTER TABLE user_profiles ADD CONSTRAINT birth_before_membership
+    CHECK (birth_date < member_since);
+```
+
+**Remember:** `DEFAULT` only fires when a column is omitted, not when `NULL` is given explicitly · `CHECK` treats `NULL` as passing (same three-valued logic as `WHERE`) — pair it with `NOT NULL` if the value must also be present · adding a constraint to an existing table fails if any current row already violates it.
