@@ -607,3 +607,18 @@ COMMIT;
 ```
 
 **Remember:** Postgres has no built-in migration concept — every tool (Flyway, Alembic, Django, Prisma...) is built on a tracking table + ordered files + transactions, on top of plain `ALTER TABLE` · never edit an already-applied migration file, write a new one · revert in reverse order — later migrations often depend on earlier ones.
+
+---
+
+## Schema vs Data Migrations · [31](31-schema-vs-data-migrations/README.md)
+
+```sql
+-- Expand -> migrate -> contract
+-- 1. Expand: column already permissive, or ALTER TABLE ADD COLUMN x TEXT; (nullable)
+-- 2. Migrate (data):
+UPDATE hashtags SET name = LOWER(name) WHERE name <> LOWER(name);
+-- 3. Contract (schema) — only safe once step 2 guarantees no violations:
+ALTER TABLE hashtags ADD CONSTRAINT hashtag_name_lowercase CHECK (name = LOWER(name));
+```
+
+**Remember:** schema migration = structure (DDL), data migration = values (DML) — keep them as separate steps so a bad backfill doesn't force undoing a good schema change · for large tables, batch data migrations into separate transactions rather than one giant `UPDATE`.
