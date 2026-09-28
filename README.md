@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-3%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-4%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `███░░░░░░░░░░░░░░░░░░░░░░░░░░░░` 3 / 31 sections
+**Progress:** `████░░░░░░░░░░░░░░░░░░░░░░░░░░░` 4 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -69,7 +69,7 @@ The core language: creating tables, reading, filtering, joining, grouping and co
 | 01 | [Simple — But Powerful — SQL Statements](01-simple-sql-statements/README.md) | Your first steps: what SQL is, creating a table, putting data in and reading it back. | ✅ |
 | 02 | [Filtering Records](02-filtering-records/README.md) | Pick exactly the rows you want, then change or remove them. | ✅ |
 | 03 | [Working with Tables](03-working-with-tables/README.md) | Designing several tables and connecting them with keys. | ✅ |
-| 04 | [Relating Records with Joins](04-relating-records-with-joins/README.md) | Combining rows from related tables into one result. | ⬜ |
+| 04 | [Relating Records with Joins](04-relating-records-with-joins/README.md) | Combining rows from related tables into one result. | ✅ |
 | 05 | [Aggregation of Records](05-aggregation-of-records/README.md) | Collapsing many rows into summaries. | ⬜ |
 | 06 | [Working with Large Datasets](06-working-with-large-datasets/README.md) | Practising everything so far on a bigger, realistic dataset. | ⬜ |
 | 07 | [Sorting Records](07-sorting-records/README.md) | Controlling the order and size of results. | ⬜ |

@@ -91,3 +91,37 @@ SELECT setval(pg_get_serial_sequence('photos', 'id'), (SELECT MAX(id) FROM photo
 ```
 
 **Remember:** create/insert parents before children, drop children before parents · a foreign key is checked on every insert/update, not just a naming convention · `ON DELETE` defaults to `NO ACTION` (blocks the delete) if you don't specify one · `CASCADE` can ripple through more than one table in a single `DELETE`.
+
+---
+
+## Relating Records with Joins · [04](04-relating-records-with-joins/README.md)
+
+```sql
+-- INNER JOIN: only rows that match on both sides
+SELECT p.url, u.username
+FROM photos AS p
+JOIN users AS u ON p.user_id = u.id;
+
+-- LEFT JOIN: keep every row from the left table, NULL if no match
+SELECT u.username, p.url
+FROM users AS u
+LEFT JOIN photos AS p ON u.id = p.user_id;
+
+-- Find rows with no match at all
+SELECT u.username
+FROM users AS u
+LEFT JOIN photos AS p ON u.id = p.user_id
+WHERE p.id IS NULL;
+
+-- FULL JOIN: keep every row from both sides
+SELECT a.x, b.x FROM a FULL JOIN b ON a.x = b.x;
+
+-- Joining the same table twice needs two different aliases
+SELECT c.comment_text, owner.username AS photo_owner, commenter.username AS commented_by
+FROM comments AS c
+JOIN photos AS p       ON c.photo_id = p.id
+JOIN users AS owner     ON p.user_id = owner.id
+JOIN users AS commenter ON c.user_id = commenter.id;
+```
+
+**Remember:** `JOIN` without `ON`/`USING` is a syntax error (good — the old comma-join style fails silently instead) · `RIGHT JOIN` is just `LEFT JOIN` with the tables swapped · a `WHERE` on the outer side's column can silently turn a `LEFT JOIN` back into an `INNER JOIN` — put that condition in `ON` instead.
