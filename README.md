@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-23%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-24%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `███████████████████████░░░░░░░░` 23 / 31 sections
+**Progress:** `████████████████████████░░░░░░░` 24 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -110,7 +110,7 @@ Writing hard queries step by step, and understanding how Postgres stores, finds 
 | 21 | [Understanding the Internals of PostgreSQL](21-understanding-the-internals-of-postgresql/README.md) | Where your data physically lives. | ✅ |
 | 22 | [A Look at Indexes for Performance](22-a-look-at-indexes-for-performance/README.md) | How indexes make lookups fast, and what they cost. | ✅ |
 | 23 | [Basic Query Tuning](23-basic-query-tuning/README.md) | Seeing what Postgres does with your query. | ✅ |
-| 24 | [Advanced Query Tuning](24-advanced-query-tuning/README.md) | Understanding the planner's cost model. | ⬜ |
+| 24 | [Advanced Query Tuning](24-advanced-query-tuning/README.md) | Understanding the planner's cost model. | ✅ |
 
 ### Part 5 — Advanced Querying
 

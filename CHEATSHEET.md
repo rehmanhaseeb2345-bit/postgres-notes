@@ -496,3 +496,16 @@ SELECT * FROM pg_stats WHERE tablename = '...' AND attname = '...';
 **Pipeline:** parser → rewriter (expands views) → planner (picks cheapest plan, using `pg_stats`) → executor.
 
 **Remember:** `EXPLAIN ANALYZE` on `INSERT`/`UPDATE`/`DELETE` really executes it — use plain `EXPLAIN` to preview anything that isn't a `SELECT` · read a plan bottom-up / most-indented-first, that's execution order.
+
+---
+
+## Advanced Tuning · [24](24-advanced-query-tuning/README.md)
+
+```sql
+-- Seq Scan cost = (pages x seq_page_cost) + (rows x cpu_tuple_cost)
+SHOW seq_page_cost;     -- default 1.0
+SHOW random_page_cost;  -- default 4.0 (lower for SSDs, e.g. 1.1)
+SHOW cpu_tuple_cost;    -- default 0.01
+```
+
+**Remember:** cost is a relative unit for comparing plans, not a time prediction · `cost=startup..total` — `LIMIT` cares mostly about startup cost, which is why it can flip the chosen plan · Postgres skipping a valid index is usually correct: the condition matches too large a fraction of the table for the index's random-access cost to pay off.
