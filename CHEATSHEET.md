@@ -274,3 +274,23 @@ SELECT SUM(CASE WHEN price < 10 THEN 1 ELSE 0 END) AS budget_count FROM products
 ```
 
 **Remember:** `GREATEST`/`LEAST` are the rare functions that don't propagate `NULL` · `CASE` branches are checked top to bottom, first match wins · no matching branch and no `ELSE` → silently `NULL`, not an error.
+
+---
+
+## Datatypes · [12](12-postgresql-complex-datatypes/README.md)
+
+```sql
+-- NUMERIC is exact; REAL/DOUBLE PRECISION are approximate — never use float for money
+SELECT 0.1::DOUBLE PRECISION + 0.2::DOUBLE PRECISION;  -- 0.30000000000000004
+SELECT 0.1::NUMERIC + 0.2::NUMERIC;                    -- 0.3
+
+-- TIMESTAMPTZ is the default for real-world event times; TIMESTAMP has no time zone
+last_login TIMESTAMPTZ,
+member_since TIMESTAMP NOT NULL
+
+-- Date math
+SELECT member_since + INTERVAL '1 year' FROM user_profiles;
+SELECT AGE(DATE '2026-09-28', birth_date) FROM user_profiles;
+```
+
+**Remember:** `NUMERIC(p,s)` for money and anything that can't tolerate rounding drift · `CHAR(n)` pads with real trailing spaces that survive concatenation · `'1'::boolean` (text) works, `1::boolean` (integer) doesn't · `BOOLEAN` has three states — `TRUE`, `FALSE`, and `NULL` (unknown).

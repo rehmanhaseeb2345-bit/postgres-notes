@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-11%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-12%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `███████████░░░░░░░░░░░░░░░░░░░░` 11 / 31 sections
+**Progress:** `████████████░░░░░░░░░░░░░░░░░░░` 12 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -84,7 +84,7 @@ Choosing the right data type for every column, and making the database protect i
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 12 | [PostgreSQL Complex Datatypes](12-postgresql-complex-datatypes/README.md) | Choosing the right type for every column. | ⬜ |
+| 12 | [PostgreSQL Complex Datatypes](12-postgresql-complex-datatypes/README.md) | Choosing the right type for every column. | ✅ |
 | 13 | [Database-Side Validation and Constraints](13-database-side-validation-and-constraints/README.md) | Making the database reject bad data. | ⬜ |
 
 ### Part 3 — Database Design
