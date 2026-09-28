@@ -152,3 +152,27 @@ HAVING COUNT(p.id) > 1;
 ```
 
 **Remember:** every `SELECT`ed column must be grouped or aggregated, no exceptions · `AVG` on zero rows is `NULL`, not `0` · `HAVING` runs after grouping, `WHERE` runs before it.
+
+---
+
+## Large Datasets · [06](06-working-with-large-datasets/README.md)
+
+```sql
+-- Generate bulk rows instead of typing them
+INSERT INTO page_views (photo_id, viewed_at, duration_seconds)
+SELECT (ARRAY[101,102,103,104,105])[1 + (n % 5)],
+       TIMESTAMP '2026-01-01' + (n * INTERVAL '1 minute'),
+       10 + (n % 50)
+FROM generate_series(1, 5000) AS n;
+
+-- Explore an unfamiliar table
+-- \dt              -- list tables (psql)
+-- \d page_views    -- describe one table (psql)
+SELECT column_name, data_type, is_nullable
+FROM information_schema.columns
+WHERE table_name = 'page_views';
+
+SELECT * FROM page_views LIMIT 5;   -- always LIMIT on an unknown table first
+```
+
+**Remember:** Postgres arrays are 1-indexed, not 0-indexed · a query that's correct on 6 rows is correct (or wrong) for the same reasons on 5,000 · `information_schema.columns` works in any tool, `\d` only works in `psql`.

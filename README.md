@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-5%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-6%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `█████░░░░░░░░░░░░░░░░░░░░░░░░░░` 5 / 31 sections
+**Progress:** `██████░░░░░░░░░░░░░░░░░░░░░░░░░` 6 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -71,7 +71,7 @@ The core language: creating tables, reading, filtering, joining, grouping and co
 | 03 | [Working with Tables](03-working-with-tables/README.md) | Designing several tables and connecting them with keys. | ✅ |
 | 04 | [Relating Records with Joins](04-relating-records-with-joins/README.md) | Combining rows from related tables into one result. | ✅ |
 | 05 | [Aggregation of Records](05-aggregation-of-records/README.md) | Collapsing many rows into summaries. | ✅ |
-| 06 | [Working with Large Datasets](06-working-with-large-datasets/README.md) | Practising everything so far on a bigger, realistic dataset. | ⬜ |
+| 06 | [Working with Large Datasets](06-working-with-large-datasets/README.md) | Practising everything so far on a bigger, realistic dataset. | ✅ |
 | 07 | [Sorting Records](07-sorting-records/README.md) | Controlling the order and size of results. | ⬜ |
 | 08 | [Unions and Intersections with Sets](08-unions-and-intersections-with-sets/README.md) | Combining the results of separate queries. | ⬜ |
 | 09 | [Assembling Queries with Subqueries](09-assembling-queries-with-subqueries/README.md) | Using the result of one query inside another. | ⬜ |
