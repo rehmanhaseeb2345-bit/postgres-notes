@@ -125,3 +125,30 @@ JOIN users AS commenter ON c.user_id = commenter.id;
 ```
 
 **Remember:** `JOIN` without `ON`/`USING` is a syntax error (good — the old comma-join style fails silently instead) · `RIGHT JOIN` is just `LEFT JOIN` with the tables swapped · a `WHERE` on the outer side's column can silently turn a `LEFT JOIN` back into an `INNER JOIN` — put that condition in `ON` instead.
+
+---
+
+## Aggregation · [05](05-aggregation-of-records/README.md)
+
+```sql
+-- One row per distinct value
+SELECT u.username, COUNT(*) AS comment_count
+FROM comments AS c
+JOIN users AS u ON c.user_id = u.id
+GROUP BY u.username;
+
+-- COUNT(*) counts rows; COUNT(column) skips NULLs (they diverge after LEFT JOIN)
+SELECT u.username, COUNT(*) AS row_count, COUNT(p.id) AS real_count
+FROM users AS u
+LEFT JOIN photos AS p ON u.id = p.user_id
+GROUP BY u.username;
+
+-- HAVING filters groups (after aggregation); WHERE can't reference an aggregate
+SELECT u.username, COUNT(p.id) AS photo_count
+FROM users AS u
+LEFT JOIN photos AS p ON u.id = p.user_id
+GROUP BY u.username
+HAVING COUNT(p.id) > 1;
+```
+
+**Remember:** every `SELECT`ed column must be grouped or aggregated, no exceptions · `AVG` on zero rows is `NULL`, not `0` · `HAVING` runs after grouping, `WHERE` runs before it.
