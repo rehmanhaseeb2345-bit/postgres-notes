@@ -545,3 +545,19 @@ SELECT * FROM reachable;
 ```
 
 **Remember:** the recursive term only sees the *previous round's* new rows, not the whole accumulated result · on any graph with a cycle, skip the cycle guard (or a depth cap) and it runs forever · use `UNION ALL`, not `UNION` — dedup separately with `MIN()`/`DISTINCT` afterward if needed.
+
+---
+
+## Views · [27](27-simplifying-queries-with-views/README.md)
+
+```sql
+CREATE VIEW photo_stats AS
+SELECT p.id, p.url, COUNT(DISTINCT l.id) AS like_count
+FROM photos p LEFT JOIN likes l ON l.photo_id = p.id
+GROUP BY p.id, p.url;
+
+CREATE OR REPLACE VIEW photo_stats AS ...;   -- can add trailing columns, not remove/reorder
+DROP VIEW photo_stats;                       -- the real way to reshape one
+```
+
+**Remember:** a view is a saved *query*, not a saved *result* — it re-runs fresh on every access, so it's a reuse/clarity tool, never a performance fix (that's materialized views, section 28) · `CREATE OR REPLACE VIEW` rejects removing or reordering existing columns.
