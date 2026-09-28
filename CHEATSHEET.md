@@ -235,3 +235,21 @@ WHERE (SELECT COUNT(*) FROM comments c WHERE c.photo_id = p.id)
 ```
 
 **Remember:** a `NULL` anywhere in a `NOT IN` subquery's results zeroes out the whole query — filter it with `WHERE col IS NOT NULL` inside the subquery · a subquery used as a scalar must return exactly one row or it errors · a `FROM`-clause subquery always needs an alias.
+
+---
+
+## Distinct · [10](10-selecting-distinct-records/README.md)
+
+```sql
+-- Dedupe whole rows (or a combination of columns)
+SELECT DISTINCT category FROM products;
+SELECT DISTINCT photo_id, duration_seconds FROM page_views;
+
+-- Count distinct values, not rows
+SELECT COUNT(DISTINCT user_id) FROM comments;
+
+-- Same result as DISTINCT here, but GROUP BY also allows aggregates
+SELECT category FROM products GROUP BY category;
+```
+
+**Remember:** multi-column `DISTINCT` dedupes on the *combination*, not each column separately · `COUNT(DISTINCT col)` still ignores `NULL` · reach for `GROUP BY` instead the moment you also want a count/sum per group.
