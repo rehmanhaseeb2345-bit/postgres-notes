@@ -340,3 +340,159 @@ erDiagram
 **The 7-step process:** nouns → properties/types → relationships → keys → rules (`NOT NULL`/`UNIQUE`/`CHECK`/`ON DELETE`) → diagram it → test against real questions.
 
 **Naming conventions used throughout:** `snake_case`, plural table names, primary key always `id`, foreign key `<singular_table>_id`, booleans `is_`/`has_`, timestamps `_at`.
+
+---
+
+## Likes · [15](15-how-to-build-a-like-system/README.md)
+
+```sql
+-- One row targets exactly one of two possible tables, with real foreign keys
+CREATE TABLE likes (
+    id         SERIAL PRIMARY KEY,
+    user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    photo_id   INTEGER REFERENCES photos(id)   ON DELETE CASCADE,
+    comment_id INTEGER REFERENCES comments(id) ON DELETE CASCADE,
+    CHECK (COALESCE(photo_id, comment_id) IS NOT NULL
+           AND (photo_id IS NULL OR comment_id IS NULL))
+);
+
+-- Plain UNIQUE doesn't work here — NULLs aren't distinct from each other. Use partial indexes:
+CREATE UNIQUE INDEX unique_photo_like   ON likes (user_id, photo_id)   WHERE photo_id IS NOT NULL;
+CREATE UNIQUE INDEX unique_comment_like ON likes (user_id, comment_id) WHERE comment_id IS NOT NULL;
+```
+
+**Remember:** a counter column can't answer "did I like this" and can drift out of sync · a polymorphic `target_type`/`target_id` column loses real foreign-key integrity · `UNIQUE` treats every `NULL` as distinct from every other `NULL` — partial unique indexes (`WHERE col IS NOT NULL`) are the fix.
+
+---
+
+## Mentions · [16](16-how-to-build-a-mention-system/README.md)
+
+```sql
+CREATE TABLE photo_tags (
+    id       SERIAL PRIMARY KEY,
+    photo_id INTEGER NOT NULL REFERENCES photos(id) ON DELETE CASCADE,
+    user_id  INTEGER NOT NULL REFERENCES users(id)  ON DELETE CASCADE,
+    x        NUMERIC(5, 2) NOT NULL CHECK (x BETWEEN 0 AND 100),  -- % position, not pixels
+    y        NUMERIC(5, 2) NOT NULL CHECK (y BETWEEN 0 AND 100),
+    UNIQUE (photo_id, user_id)
+);
+```
+
+**Remember:** one table vs two isn't decided by "how many possible targets" — it's decided by whether the non-target columns actually match (contrast with section 15's `likes`) · store tag position as a percentage, not pixels, so it survives any display size.
+
+---
+
+## Hashtags · [17](17-how-to-build-a-hashtag-system/README.md)
+
+```sql
+CREATE TABLE hashtags (id SERIAL PRIMARY KEY, name VARCHAR(50) NOT NULL UNIQUE);
+CREATE TABLE hashtags_posts (
+    hashtag_id INTEGER NOT NULL REFERENCES hashtags(id) ON DELETE CASCADE,
+    photo_id   INTEGER NOT NULL REFERENCES photos(id)   ON DELETE CASCADE,
+    PRIMARY KEY (hashtag_id, photo_id)
+);
+
+-- Real-time count vs a denormalized cache (fine here — the source rows aren't lost)
+SELECT h.name, COUNT(*) FROM hashtags h JOIN hashtags_posts hp ON h.id = hp.hashtag_id GROUP BY h.name;
+```
+
+**Remember:** never store hashtags as plain text in a column — `LIKE '%...%'` gives false substring matches and can't use an index · lowercase hashtag names on the way in so `#Sunset`/`#sunset` don't split into two rows · a denormalized counter is fine when the detailed rows still exist to recompute it from (unlike section 15's `likes_count`).
+
+---
+
+## Followers · [18](18-how-to-design-a-follower-system/README.md)
+
+```sql
+CREATE TABLE followers (
+    follower_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    followed_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    PRIMARY KEY (follower_id, followed_id),
+    CHECK (follower_id <> followed_id)
+);
+
+-- Self-join to find mutual follows
+SELECT f1.follower_id, f1.followed_id
+FROM followers f1
+JOIN followers f2 ON f1.follower_id = f2.followed_id AND f1.followed_id = f2.follower_id
+WHERE f1.follower_id < f1.followed_id;
+```
+
+**Remember:** a self-referencing many-to-many needs two foreign keys to the *same* table, named by role (`follower_id`/`followed_id`), not by target · `CHECK` blocks self-follows, the composite primary key blocks duplicates — two different rules, two different tools.
+
+---
+
+## Implementing the Design · [19](19-implementing-database-design-patterns/README.md)
+
+`sample-db/` is now the full 9-table schema (sections 3, 12, 15-18) — every section from here on loads it directly.
+
+```sql
+-- COUNT(DISTINCT ...) once more than one LEFT JOIN is chained — joins multiply rows
+SELECT p.url, COUNT(DISTINCT l.id) AS like_count, COUNT(DISTINCT pt.id) AS tag_count
+FROM photos p
+LEFT JOIN likes l      ON l.photo_id = p.id
+LEFT JOIN photo_tags pt ON pt.photo_id = p.id
+GROUP BY p.id, p.url;
+```
+
+**Remember:** dependency order (parents before children) scales to any number of tables, not just 2-3 · chained `LEFT JOIN`s multiply rows against each other — `COUNT`/`STRING_AGG` need `DISTINCT` once more than one join is in play.
+
+---
+
+## Complex Queries · [20](20-approaching-and-writing-complex-queries/README.md)
+
+```sql
+-- Best row per group (Postgres-specific — needs ORDER BY to start with the same column)
+SELECT DISTINCT ON (u.username) u.username, p.url, COUNT(l.id) AS like_count
+FROM users u
+JOIN photos p ON p.user_id = u.id
+LEFT JOIN likes l ON l.photo_id = p.id
+GROUP BY u.username, p.url
+ORDER BY u.username, like_count DESC;
+```
+
+**The process:** restate the question precisely → identify every table → check the plain `JOIN` shape and row count *before* aggregating → aggregate with `DISTINCT` where needed → filter last (`WHERE` vs `HAVING`) → test zero/tie/empty edge cases.
+
+**Remember:** `DISTINCT ON (col)` keeps the first row per `col` as defined by `ORDER BY` — the `ORDER BY` must start with that same column, or it's an error.
+
+---
+
+## Internals · [21](21-understanding-the-internals-of-postgresql/README.md)
+
+```sql
+SHOW data_directory;
+SELECT pg_relation_filepath('users');   -- a table is really a numbered file
+SELECT ctid, username FROM users;       -- physical address: (block, position)
+```
+
+**Remember:** a table is an unordered heap of 8KB blocks — that's the actual, physical reason row order was never guaranteed · `UPDATE` writes a new tuple instead of editing in place, which is why a heavily-updated table can bloat until `VACUUM` runs · `ctid` is a physical address, not a stable identifier — never store or rely on it, use a real primary key.
+
+---
+
+## Indexes · [22](22-a-look-at-indexes-for-performance/README.md)
+
+```sql
+CREATE INDEX idx_table_column ON table_name (column_name);
+DROP INDEX idx_table_column;
+
+EXPLAIN SELECT * FROM page_views WHERE photo_id = 101;  -- Seq Scan vs Index Scan
+
+SELECT indexname, indexdef FROM pg_indexes WHERE tablename = 'users';
+```
+
+**Remember:** `PRIMARY KEY`/`UNIQUE` auto-create an index; **foreign key columns do not** — index them by hand if you join or cascade-delete on them · every index adds write overhead on every `INSERT`/`UPDATE`/`DELETE`, so index deliberately, not "just in case" · a leading-wildcard `LIKE '%x%'` can't use a plain B-tree at all.
+
+---
+
+## Query Tuning · [23](23-basic-query-tuning/README.md)
+
+```sql
+EXPLAIN query;            -- shows the plan + cost estimate, doesn't run it
+EXPLAIN ANALYZE query;    -- actually RUNS it, adds real timing + actual rows
+
+ANALYZE table_name;       -- refresh planner statistics after a bulk load
+SELECT * FROM pg_stats WHERE tablename = '...' AND attname = '...';
+```
+
+**Pipeline:** parser → rewriter (expands views) → planner (picks cheapest plan, using `pg_stats`) → executor.
+
+**Remember:** `EXPLAIN ANALYZE` on `INSERT`/`UPDATE`/`DELETE` really executes it — use plain `EXPLAIN` to preview anything that isn't a `SELECT` · read a plan bottom-up / most-indented-first, that's execution order.

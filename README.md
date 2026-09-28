@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-14%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-23%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `██████████████░░░░░░░░░░░░░░░░░` 14 / 31 sections
+**Progress:** `███████████████████████░░░░░░░░` 23 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -94,11 +94,11 @@ Designing real features (likes, mentions, hashtags, followers) and building a fu
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
 | 14 | [Database Structure Design Patterns](14-database-structure-design-patterns/README.md) | How to approach designing a schema. | ✅ |
-| 15 | [How to Build a 'Like' System](15-how-to-build-a-like-system/README.md) | Designing likes the right way. | ⬜ |
-| 16 | [How to Build a 'Mention' System](16-how-to-build-a-mention-system/README.md) | Tagging users in photos and captions. | ⬜ |
-| 17 | [How to Build a 'Hashtag' System](17-how-to-build-a-hashtag-system/README.md) | Storing hashtags so they can be searched. | ⬜ |
-| 18 | [How to Design a 'Follower' System](18-how-to-design-a-follower-system/README.md) | Users following users. | ⬜ |
-| 19 | [Implementing Database Design Patterns](19-implementing-database-design-patterns/README.md) | Turning the designs into real tables. | ⬜ |
+| 15 | [How to Build a 'Like' System](15-how-to-build-a-like-system/README.md) | Designing likes the right way. | ✅ |
+| 16 | [How to Build a 'Mention' System](16-how-to-build-a-mention-system/README.md) | Tagging users in photos and captions. | ✅ |
+| 17 | [How to Build a 'Hashtag' System](17-how-to-build-a-hashtag-system/README.md) | Storing hashtags so they can be searched. | ✅ |
+| 18 | [How to Design a 'Follower' System](18-how-to-design-a-follower-system/README.md) | Users following users. | ✅ |
+| 19 | [Implementing Database Design Patterns](19-implementing-database-design-patterns/README.md) | Turning the designs into real tables. | ✅ |
 
 ### Part 4 — Complex Queries & Performance
 
@@ -106,10 +106,10 @@ Writing hard queries step by step, and understanding how Postgres stores, finds 
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 20 | [Approaching and Writing Complex Queries](20-approaching-and-writing-complex-queries/README.md) | A repeatable method for hard queries. | ⬜ |
-| 21 | [Understanding the Internals of PostgreSQL](21-understanding-the-internals-of-postgresql/README.md) | Where your data physically lives. | ⬜ |
-| 22 | [A Look at Indexes for Performance](22-a-look-at-indexes-for-performance/README.md) | How indexes make lookups fast, and what they cost. | ⬜ |
-| 23 | [Basic Query Tuning](23-basic-query-tuning/README.md) | Seeing what Postgres does with your query. | ⬜ |
+| 20 | [Approaching and Writing Complex Queries](20-approaching-and-writing-complex-queries/README.md) | A repeatable method for hard queries. | ✅ |
+| 21 | [Understanding the Internals of PostgreSQL](21-understanding-the-internals-of-postgresql/README.md) | Where your data physically lives. | ✅ |
+| 22 | [A Look at Indexes for Performance](22-a-look-at-indexes-for-performance/README.md) | How indexes make lookups fast, and what they cost. | ✅ |
+| 23 | [Basic Query Tuning](23-basic-query-tuning/README.md) | Seeing what Postgres does with your query. | ✅ |
 | 24 | [Advanced Query Tuning](24-advanced-query-tuning/README.md) | Understanding the planner's cost model. | ⬜ |
 
 ### Part 5 — Advanced Querying
