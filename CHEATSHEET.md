@@ -591,3 +591,19 @@ ROLLBACK;    -- ...neither does
 ```
 
 **Remember:** one failed statement aborts the *whole* transaction — every later statement, even valid ones, gets rejected (`current transaction is aborted...`) until `ROLLBACK` · nothing is real until `COMMIT`, even a statement that itself reported success · other connections can't see uncommitted changes at all.
+
+---
+
+## Schema Migrations · [30](30-managing-database-design-with-schema-migrations/README.md)
+
+```sql
+CREATE TABLE schema_migrations (version VARCHAR(255) PRIMARY KEY, applied_at TIMESTAMP NOT NULL DEFAULT NOW());
+
+BEGIN;
+ALTER TABLE photos ADD COLUMN updated_at TIMESTAMP NOT NULL DEFAULT NOW();   -- "up"
+INSERT INTO schema_migrations (version) VALUES ('002_add_photos_updated_at');
+COMMIT;
+-- "down": ALTER TABLE photos DROP COLUMN updated_at;
+```
+
+**Remember:** Postgres has no built-in migration concept — every tool (Flyway, Alembic, Django, Prisma...) is built on a tracking table + ordered files + transactions, on top of plain `ALTER TABLE` · never edit an already-applied migration file, write a new one · revert in reverse order — later migrations often depend on earlier ones.
