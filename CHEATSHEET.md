@@ -193,3 +193,19 @@ SELECT id FROM page_views ORDER BY id LIMIT 10 OFFSET 10;
 ```
 
 **Remember:** `LIMIT`/`OFFSET` without `ORDER BY` isn't meaningfully "the first N" — always sort first · `DESC` only applies to the column it's attached to, not every column after it · `OFFSET` gets slower the further in you page, since Postgres still walks past every skipped row.
+
+---
+
+## Sets · [08](08-unions-and-intersections-with-sets/README.md)
+
+```sql
+-- UNION removes duplicates from the combined result; UNION ALL keeps them
+SELECT username FROM a UNION SELECT username FROM b;
+SELECT username FROM a UNION ALL SELECT username FROM b;
+
+-- INTERSECT: only rows in both · EXCEPT: rows in the first, not the second
+SELECT username FROM a INTERSECT SELECT username FROM b;
+SELECT username FROM a EXCEPT SELECT username FROM b;   -- order matters!
+```
+
+**Remember:** both sides need the same number of columns, in compatible types, matched by position (not name) · `EXCEPT` is not symmetric — `A EXCEPT B` ≠ `B EXCEPT A` · the result's column names come from the first query only.
