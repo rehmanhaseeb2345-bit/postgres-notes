@@ -209,3 +209,29 @@ SELECT username FROM a EXCEPT SELECT username FROM b;   -- order matters!
 ```
 
 **Remember:** both sides need the same number of columns, in compatible types, matched by position (not name) · `EXCEPT` is not symmetric — `A EXCEPT B` ≠ `B EXCEPT A` · the result's column names come from the first query only.
+
+---
+
+## Subqueries · [09](09-assembling-queries-with-subqueries/README.md)
+
+```sql
+-- In WHERE: IN is really "= ANY", NOT IN is really "<> ALL"
+SELECT username FROM users WHERE id IN (SELECT user_id FROM photos);
+
+-- In SELECT: must return exactly one value (correlated if it uses the outer row)
+SELECT u.username,
+       (SELECT COUNT(*) FROM photos p WHERE p.user_id = u.id) AS photo_count
+FROM users u;
+
+-- In FROM: needs an alias
+SELECT t.username, t.cnt FROM (
+    SELECT username, COUNT(*) AS cnt FROM users GROUP BY username
+) AS t;
+
+-- ALL / ANY (SOME): compare against every / any row a subquery returns
+SELECT url FROM photos p
+WHERE (SELECT COUNT(*) FROM comments c WHERE c.photo_id = p.id)
+      >= ALL (SELECT COUNT(*) FROM comments GROUP BY photo_id);
+```
+
+**Remember:** a `NULL` anywhere in a `NOT IN` subquery's results zeroes out the whole query — filter it with `WHERE col IS NOT NULL` inside the subquery · a subquery used as a scalar must return exactly one row or it errors · a `FROM`-clause subquery always needs an alias.
