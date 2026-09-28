@@ -253,3 +253,24 @@ SELECT category FROM products GROUP BY category;
 ```
 
 **Remember:** multi-column `DISTINCT` dedupes on the *combination*, not each column separately · `COUNT(DISTINCT col)` still ignores `NULL` · reach for `GROUP BY` instead the moment you also want a count/sum per group.
+
+---
+
+## Utility Operators · [11](11-utility-operators-keywords-and-functions/README.md)
+
+```sql
+-- Biggest/smallest of a few values in one row (NOT the same as MAX/MIN across rows)
+SELECT GREATEST(price, 5) FROM products;   -- ignores NULL unless every argument is NULL
+
+-- Branching logic as a value
+SELECT CASE
+    WHEN price < 10  THEN 'Budget'
+    WHEN price < 100 THEN 'Midrange'
+    ELSE 'Premium'
+END AS price_tier FROM products;
+
+-- Conditional counting inside an aggregate
+SELECT SUM(CASE WHEN price < 10 THEN 1 ELSE 0 END) AS budget_count FROM products;
+```
+
+**Remember:** `GREATEST`/`LEAST` are the rare functions that don't propagate `NULL` · `CASE` branches are checked top to bottom, first match wins · no matching branch and no `ELSE` → silently `NULL`, not an error.
