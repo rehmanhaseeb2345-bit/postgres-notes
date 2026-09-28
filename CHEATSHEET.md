@@ -317,3 +317,26 @@ ALTER TABLE user_profiles ADD CONSTRAINT birth_before_membership
 ```
 
 **Remember:** `DEFAULT` only fires when a column is omitted, not when `NULL` is given explicitly · `CHECK` treats `NULL` as passing (same three-valued logic as `WHERE`) — pair it with `NOT NULL` if the value must also be present · adding a constraint to an existing table fails if any current row already violates it.
+
+---
+
+## Design Patterns · [14](14-database-structure-design-patterns/README.md)
+
+```sql
+-- A pure join table: composite primary key = the uniqueness rule, no extra id column
+CREATE TABLE album_photos (
+    album_id INTEGER NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
+    photo_id INTEGER NOT NULL REFERENCES photos(id) ON DELETE CASCADE,
+    PRIMARY KEY (album_id, photo_id)
+);
+```
+
+```mermaid
+erDiagram
+    USERS ||--o{ PHOTOS : posts
+    USERS ||--o| USER_PROFILES : has
+```
+
+**The 7-step process:** nouns → properties/types → relationships → keys → rules (`NOT NULL`/`UNIQUE`/`CHECK`/`ON DELETE`) → diagram it → test against real questions.
+
+**Naming conventions used throughout:** `snake_case`, plural table names, primary key always `id`, foreign key `<singular_table>_id`, booleans `is_`/`has_`, timestamps `_at`.

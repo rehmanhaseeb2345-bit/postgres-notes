@@ -209,7 +209,7 @@ flowchart LR
 
 ### ⚠️ Traps
 
-- **`OFFSET` on a large table gets slower the further in I page.** Postgres still has to walk through (and discard) every skipped row to know where row `10,001` starts — `OFFSET 10000` does real work, it doesn't jump straight there. On genuinely large tables, keyed pagination (`WHERE id > last_seen_id ORDER BY id LIMIT page_size`) avoids this, at the cost of not being able to jump to an arbitrary page number. I haven't needed that trade-off yet at 5,000 rows, but it's why "just add `OFFSET`" stops being the obvious answer at real scale — more on reading query cost in [24 · Basic Query Tuning](../24-basic-query-tuning/README.md).
+- **`OFFSET` on a large table gets slower the further in I page.** Postgres still has to walk through (and discard) every skipped row to know where row `10,001` starts — `OFFSET 10000` does real work, it doesn't jump straight there. On genuinely large tables, keyed pagination (`WHERE id > last_seen_id ORDER BY id LIMIT page_size`) avoids this, at the cost of not being able to jump to an arbitrary page number. I haven't needed that trade-off yet at 5,000 rows, but it's why "just add `OFFSET`" stops being the obvious answer at real scale — more on reading query cost in [23 · Basic Query Tuning](../23-basic-query-tuning/README.md).
 - **Paging through a table that's changing between requests** → row `11` on page 2 might not be the same row it was a minute ago if something was inserted or deleted in between, since `OFFSET` counts *positions* in the current sorted result, not stable identities.
 
 ---

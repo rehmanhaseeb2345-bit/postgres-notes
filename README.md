@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-13%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-14%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `█████████████░░░░░░░░░░░░░░░░░░` 13 / 31 sections
+**Progress:** `██████████████░░░░░░░░░░░░░░░░░` 14 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -93,7 +93,7 @@ Designing real features (likes, mentions, hashtags, followers) and building a fu
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 14 | [Database Structure Design Patterns](14-database-structure-design-patterns/README.md) | How to approach designing a schema. | ⬜ |
+| 14 | [Database Structure Design Patterns](14-database-structure-design-patterns/README.md) | How to approach designing a schema. | ✅ |
 | 15 | [How to Build a 'Like' System](15-how-to-build-a-like-system/README.md) | Designing likes the right way. | ⬜ |
 | 16 | [How to Build a 'Mention' System](16-how-to-build-a-mention-system/README.md) | Tagging users in photos and captions. | ⬜ |
 | 17 | [How to Build a 'Hashtag' System](17-how-to-build-a-hashtag-system/README.md) | Storing hashtags so they can be searched. | ⬜ |
