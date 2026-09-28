@@ -509,3 +509,19 @@ SHOW cpu_tuple_cost;    -- default 0.01
 ```
 
 **Remember:** cost is a relative unit for comparing plans, not a time prediction · `cost=startup..total` — `LIMIT` cares mostly about startup cost, which is why it can flip the chosen plan · Postgres skipping a valid index is usually correct: the condition matches too large a fraction of the table for the index's random-access cost to pay off.
+
+---
+
+## CTEs · [25](25-simple-common-table-expressions/README.md)
+
+```sql
+WITH photo_counts AS (
+    SELECT u.username, COUNT(p.id) AS cnt
+    FROM users u LEFT JOIN photos p ON u.id = p.user_id
+    GROUP BY u.username
+)
+SELECT username, cnt, (SELECT AVG(cnt) FROM photo_counts) AS avg_cnt
+FROM photo_counts;
+```
+
+**Remember:** a single-use CTE and a `FROM`-subquery are identical — the real reason to reach for `WITH` is reusing the same named result more than once in one query, which a subquery can't do without repeating itself.

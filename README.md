@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-24%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-25%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `████████████████████████░░░░░░░` 24 / 31 sections
+**Progress:** `█████████████████████████░░░░░░` 25 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -118,7 +118,7 @@ CTEs, recursive queries, views and materialized views.
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 25 | [Simple Common Table Expressions](25-simple-common-table-expressions/README.md) | Naming a sub-result to make queries readable. | ⬜ |
+| 25 | [Simple Common Table Expressions](25-simple-common-table-expressions/README.md) | Naming a sub-result to make queries readable. | ✅ |
 | 26 | [Recursive Common Table Expressions](26-recursive-common-table-expressions/README.md) | Queries that walk through trees and graphs. | ⬜ |
 | 27 | [Simplifying Queries with Views](27-simplifying-queries-with-views/README.md) | Saving a query and using it like a table. | ⬜ |
 | 28 | [Optimizing Queries with Materialized Views](28-optimizing-queries-with-materialized-views/README.md) | Caching the result of an expensive query. | ⬜ |
