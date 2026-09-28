@@ -176,3 +176,20 @@ SELECT * FROM page_views LIMIT 5;   -- always LIMIT on an unknown table first
 ```
 
 **Remember:** Postgres arrays are 1-indexed, not 0-indexed · a query that's correct on 6 rows is correct (or wrong) for the same reasons on 5,000 · `information_schema.columns` works in any tool, `\d` only works in `psql`.
+
+---
+
+## Sorting · [07](07-sorting-records/README.md)
+
+```sql
+-- Sort, with a tiebreaker column
+SELECT user_id, url FROM photos ORDER BY user_id ASC, url ASC;
+
+-- Top N
+SELECT comment_text FROM comments ORDER BY LENGTH(comment_text) DESC LIMIT 3;
+
+-- One page of a larger result (page 2, 10 per page)
+SELECT id FROM page_views ORDER BY id LIMIT 10 OFFSET 10;
+```
+
+**Remember:** `LIMIT`/`OFFSET` without `ORDER BY` isn't meaningfully "the first N" — always sort first · `DESC` only applies to the column it's attached to, not every column after it · `OFFSET` gets slower the further in you page, since Postgres still walks past every skipped row.
