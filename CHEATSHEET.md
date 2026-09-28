@@ -577,3 +577,17 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY hashtag_stats;    -- non-blocking, needs 
 ```
 
 **Remember:** stores the actual result on disk — fast reads, but frozen as of the last `REFRESH`, nothing updates it automatically · right fit = expensive + read-often + staleness-tolerant, all three · wrong fit for anything that needs to always be exactly current.
+
+---
+
+## Transactions · [29](29-handling-concurrency-and-reversibility-with-transactions/README.md)
+
+```sql
+BEGIN;
+DELETE FROM album_photos WHERE album_id = 1 AND photo_id = 103;
+INSERT INTO album_photos (album_id, photo_id) VALUES (2, 103);
+COMMIT;      -- both stick, or...
+ROLLBACK;    -- ...neither does
+```
+
+**Remember:** one failed statement aborts the *whole* transaction — every later statement, even valid ones, gets rejected (`current transaction is aborted...`) until `ROLLBACK` · nothing is real until `COMMIT`, even a statement that itself reported success · other connections can't see uncommitted changes at all.

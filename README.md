@@ -6,7 +6,7 @@
 
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Sections](https://img.shields.io/badge/sections-31-blue?style=for-the-badge)
-![Progress](https://img.shields.io/badge/written-28%20%2F%2031-brightgreen?style=for-the-badge)
+![Progress](https://img.shields.io/badge/written-29%20%2F%2031-brightgreen?style=for-the-badge)
 
 </div>
 
@@ -56,7 +56,7 @@ psql -d postgres_notes -f sample-db/seed.sql
 
 ## 🗺️ What I've covered
 
-**Progress:** `████████████████████████████░░░` 28 / 31 sections
+**Progress:** `█████████████████████████████░░` 29 / 31 sections
 
 **Legend:** ✅ written · 🚧 in progress · ⬜ not yet
 
@@ -129,7 +129,7 @@ Keeping data consistent and changing a schema safely over time.
 
 | # | Section | What's inside | Status |
 |:-:|---|---|:-:|
-| 29 | [Handling Concurrency and Reversibility with Transactions](29-handling-concurrency-and-reversibility-with-transactions/README.md) | All-or-nothing changes. | ⬜ |
+| 29 | [Handling Concurrency and Reversibility with Transactions](29-handling-concurrency-and-reversibility-with-transactions/README.md) | All-or-nothing changes. | ✅ |
 | 30 | [Managing Database Design with Schema Migrations](30-managing-database-design-with-schema-migrations/README.md) | Changing the schema safely, in steps you can undo. | ⬜ |
 | 31 | [Schema vs Data Migrations](31-schema-vs-data-migrations/README.md) | Keeping structure changes and data changes apart. | ⬜ |
 
