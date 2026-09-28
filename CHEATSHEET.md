@@ -525,3 +525,23 @@ FROM photo_counts;
 ```
 
 **Remember:** a single-use CTE and a `FROM`-subquery are identical — the real reason to reach for `WITH` is reusing the same named result more than once in one query, which a subquery can't do without repeating itself.
+
+---
+
+## Recursive CTEs · [26](26-recursive-common-table-expressions/README.md)
+
+```sql
+WITH RECURSIVE reachable AS (
+    SELECT followed_id AS user_id, 1 AS depth, ARRAY[1, followed_id] AS path
+    FROM followers WHERE follower_id = 1
+
+    UNION ALL
+
+    SELECT f.followed_id, r.depth + 1, r.path || f.followed_id
+    FROM followers f JOIN reachable r ON f.follower_id = r.user_id
+    WHERE r.depth < 3 AND NOT (f.followed_id = ANY (r.path))   -- cycle guard
+)
+SELECT * FROM reachable;
+```
+
+**Remember:** the recursive term only sees the *previous round's* new rows, not the whole accumulated result · on any graph with a cycle, skip the cycle guard (or a depth cap) and it runs forever · use `UNION ALL`, not `UNION` — dedup separately with `MIN()`/`DISTINCT` afterward if needed.
