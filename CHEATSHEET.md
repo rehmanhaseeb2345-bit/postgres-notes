@@ -561,3 +561,19 @@ DROP VIEW photo_stats;                       -- the real way to reshape one
 ```
 
 **Remember:** a view is a saved *query*, not a saved *result* — it re-runs fresh on every access, so it's a reuse/clarity tool, never a performance fix (that's materialized views, section 28) · `CREATE OR REPLACE VIEW` rejects removing or reordering existing columns.
+
+---
+
+## Materialized Views · [28](28-optimizing-queries-with-materialized-views/README.md)
+
+```sql
+CREATE MATERIALIZED VIEW hashtag_stats AS
+SELECT h.name, COUNT(*) AS post_count
+FROM hashtags h JOIN hashtags_posts hp ON h.id = hp.hashtag_id
+GROUP BY h.name;
+
+REFRESH MATERIALIZED VIEW hashtag_stats;                -- the ONLY thing that updates it
+REFRESH MATERIALIZED VIEW CONCURRENTLY hashtag_stats;    -- non-blocking, needs a UNIQUE index first
+```
+
+**Remember:** stores the actual result on disk — fast reads, but frozen as of the last `REFRESH`, nothing updates it automatically · right fit = expensive + read-often + staleness-tolerant, all three · wrong fit for anything that needs to always be exactly current.
